@@ -21,6 +21,7 @@ services:
       - LT_UPDATE_MODELS=true
       - LT_LOAD_ONLY=en,de,ru,fr,es
       - LT_SSL=true
+      - LT_HOST=prosto-german.com
     #   - LT_API_KEYS=true
     #   - LT_API_KEYS_DB_PATH=/app/db/api_keys.db # Same result as `db/api_keys.db` or `./db/api_keys.db`
     ## Uncomment these vars and libretranslate_models volume to optimize loading time.
