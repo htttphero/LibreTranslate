@@ -8,7 +8,7 @@ services:
       dockerfile: docker/Dockerfile
     restart: unless-stopped
     ports:
-      - "80:5000"
+      - "5000:5000"
     ## Uncomment this for logging in docker compose logs
     # tty: true
     healthcheck:
@@ -22,6 +22,7 @@ services:
       - LT_LOAD_ONLY=en,de,ru,fr,es
       - LT_SSL=true
       - LT_HOST=prosto-german.com
+      - LT_METRICS=true
     #   - LT_API_KEYS=true
     #   - LT_API_KEYS_DB_PATH=/app/db/api_keys.db # Same result as `db/api_keys.db` or `./db/api_keys.db`
     ## Uncomment these vars and libretranslate_models volume to optimize loading time.
@@ -32,6 +33,13 @@ services:
       # Keep the models in a docker volume, to avoid re-downloading on startup
       - libretranslate_models:/home/libretranslate/.local:rw
 
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+      
 volumes:
   # libretranslate_api_keys:
   libretranslate_models:
