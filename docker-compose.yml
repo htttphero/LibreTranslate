@@ -8,7 +8,8 @@ services:
       dockerfile: docker/Dockerfile
     restart: unless-stopped
     ports:
-      - "80:5000"
+     #  - "80:5000"
+     - "5000:5000"
     ## Uncomment this for logging in docker compose logs
     # tty: true
     healthcheck:
