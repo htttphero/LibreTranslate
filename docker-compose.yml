@@ -13,25 +13,20 @@ services:
     # tty: true
     healthcheck:
       test: ['CMD-SHELL', './venv/bin/python scripts/healthcheck.py']
-    ## Uncomment above command and define your args if necessary
-    # command: --ssl --ga-id MY-GA-ID --req-limit 100 --char-limit 500
-    ## Uncomment this section and the libretranslate_api_keys volume if you want to backup your API keys
+
     environment:
       - LT_DISABLE_WEB_UI=true
       - LT_UPDATE_MODELS=true
       - LT_LOAD_ONLY=en,de,ru,fr,es
       - LT_SSL=true
-      - LT_HOST=prosto-german.com
       - LT_METRICS=true
       - LT_METRICS_AUTH_TOKEN=mysecrettoken
-    #   - LT_API_KEYS=true
-    #   - LT_API_KEYS_DB_PATH=/app/db/api_keys.db # Same result as `db/api_keys.db` or `./db/api_keys.db`
-    ## Uncomment these vars and libretranslate_models volume to optimize loading time.
-    #   - LT_UPDATE_MODELS=true
-    #   - LT_LOAD_ONLY=en,fr
+      - LT_API_KEYS=true
+      - LT_REQ_LIMIT=0
+      - LT_API_KEYS_DB_PATH=/app/db/api_keys.db
+
     volumes:
-      # - libretranslate_api_keys:/app/db
-      # Keep the models in a docker volume, to avoid re-downloading on startup
+      - libretranslate_api_keys:/app/db
       - libretranslate_models:/home/libretranslate/.local:rw
 
   prometheus:
@@ -42,5 +37,5 @@ services:
       - "127.0.0.1:9090:9090"
       
 volumes:
-  # libretranslate_api_keys:
+  libretranslate_api_keys:
   libretranslate_models:
