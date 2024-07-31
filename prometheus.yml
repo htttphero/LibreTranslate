@@ -3,5 +3,7 @@ global:
 
 scrape_configs:
   - job_name: 'libretranslate'
+    metrics_path: '/metrics'
+    scheme: 'http'
     static_configs:
       - targets: ['libretranslate:5000']
