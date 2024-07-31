@@ -38,7 +38,7 @@ services:
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
-      - "9090:9090"
+      - "127.0.0.1:9090:9090"
       
 volumes:
   # libretranslate_api_keys:
